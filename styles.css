@@ -377,12 +377,15 @@ input,
 select {
     border-radius: 0.95rem;
     border: 1px solid rgba(255, 255, 255, 0.11);
-    background: rgba(128, 128, 128, 0.2);
+    background: rgb(255, 255, 255);
     color: var(--text);
     padding: 0.95rem 1rem;
     outline: none;
 }
-
+select option {
+    background: rgba(64, 64, 64, 0.9);
+    color: var(--text);
+}
 input:focus,
 select:focus {
     border-color: rgba(244, 181, 43, 0.8);
