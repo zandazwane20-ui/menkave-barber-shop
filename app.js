@@ -2,6 +2,9 @@ const servicePrices = {
     "Haircut": 450,
     "Beard Trim": 300,
     "Style & Finish": 600,
+    "Shave": 250,
+    "Hair Wash": 150,
+    "Facial": 400,
 };
 
 const bookingForm = document.getElementById('booking-form');
@@ -83,3 +86,16 @@ bookingForm.addEventListener('submit', (event) => {
 
 serviceSelect.addEventListener('change', updatePrice);
 updatePrice();
+
+// Service card click functionality
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const service = card.dataset.service;
+        if (service) {
+            serviceSelect.value = service;
+            updatePrice();
+            // Scroll to booking section
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
