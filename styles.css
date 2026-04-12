@@ -376,8 +376,8 @@ label {
 input,
 select {
     border-radius: 0.95rem;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    background: rgba(128, 128, 128, 0.2);
     color: var(--text);
     padding: 0.95rem 1rem;
     outline: none;
@@ -406,7 +406,7 @@ select:focus {
     align-items: center;
     justify-content: space-between;
     padding: 1rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.11);
 }
 
 .full-width {
