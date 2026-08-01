@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://images.fresha.com/locations/location-profile-images/2548421/4603926/609d1c54-d695-4178-ac73-27d5b039cb3a-PimvilleMenkave-ZA-Gauteng-Pimville-PimvilleZone4-Fresha.jpg?class=gallery-modal-small&watermark=true&f_width=640">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <title>Menkave Barber Shop</title>
 </head>
 <body>
     <header class="site-header">
         <div class="container header-inner">
             <a href="index.html" class="brand">Pimville Menkave</a>
-            <nav class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="gallery.html">Gallery</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-                <a href="#booking">Book</a>
-            </nav>
+            <div class="nav-cart">
+                <nav class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="gallery.html">Gallery</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#booking">Book</a>
+                </nav>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -26,7 +34,7 @@
             <div class="container hero-content">
                 <span class="eyebrow">Premium grooming</span>
                 <h1>The barber experience for modern men in South Africa.</h1>
-                <p>Book your slot, choose a service, and pay securely to reserve your appointment at Menkave Barber Shop in Cape Town.</p>
+                <p>Book your slot, choose a service, and pay securely to reserve your appointment at Pimville Menkave Barber Shop in Soweto.</p>
                 <div class="hero-buttons">
                     <a href="#booking" class="btn btn-primary">Book Now</a>
                     <a href="gallery.html" class="btn btn-secondary">View Gallery</a>
@@ -40,41 +48,47 @@
                 <h2>Barber services designed for every style.</h2>
             </div>
             <div class="services-grid">
-                <article class="service-card" data-service="Haircut">
+                <article class="service-card" data-service="Chiskop">
                     <i class="fas fa-cut"></i>
-                    <h3>Haircut</h3>
+                    <h3>Chiskop</h3>
                     <p>Classic cuts, fades, and modern looks tailored to your shape.</p>
-                    <span class="price">R450</span>
+                    <span class="price">R50</span>
+                    <button type="button" class="add-to-cart-btn" data-service="Chiskop">Add to Cart</button>
                 </article>
-                <article class="service-card" data-service="Beard Trim">
+                <article class="service-card" data-service="Plain cut/Fade">
                     <i class="fas fa-beard"></i>
-                    <h3>Beard Trim</h3>
-                    <p>Sculpted beard lines, shape, and conditioning for a sharp finish.</p>
-                    <span class="price">R300</span>
+                    <h3>Plain cut/Fade</h3>
+                    <p>Classic cuts, fades, and modern looks tailored to your shape.</p>
+                    <span class="price">R100</span>
+                    <button type="button" class="add-to-cart-btn" data-service="Plain cut/Fade">Add to Cart</button>
                 </article>
-                <article class="service-card" data-service="Style & Finish">
+                <article class="service-card" data-service="Cut & dye">
                     <i class="fas fa-star"></i>
-                    <h3>Style & Finish</h3>
+                    <h3>Cut & dye(short hair)</h3>
                     <p>Premium styling, hot towel finish, and detail work for a polished look.</p>
-                    <span class="price">R600</span>
+                    <span class="price">R180</span>
+                    <button type="button" class="add-to-cart-btn" data-service="Cut & dye">Add to Cart</button>
                 </article>
-                <article class="service-card" data-service="Shave">
+                <article class="service-card" data-service="Cut & trim dye">
                     <i class="fas fa-scissors"></i>
-                    <h3>Shave</h3>
-                    <p>Traditional straight razor shave with hot towel and aftershave.</p>
-                    <span class="price">R250</span>
+                    <h3>Cut & trim dye</h3>
+                    <p>Complete grooming experience with cut, trim, and dye services.</p>
+                    <span class="price">R130</span>
+                    <button type="button" class="add-to-cart-btn" data-service="Cut & trim dye">Add to Cart</button>
                 </article>
-                <article class="service-card" data-service="Hair Wash">
+                <article class="service-card" data-service="Cut & dye (long hair)">
                     <i class="fas fa-shower"></i>
-                    <h3>Hair Wash</h3>
+                    <h3>Cut & dye (long hair)</h3>
                     <p>Deep cleansing wash with premium shampoos and scalp massage.</p>
-                    <span class="price">R150</span>
+                    <span class="price">R200</span>
+                    <button type="button" class="add-to-cart-btn" data-service="Cut & dye (long hair)">Add to Cart</button>
                 </article>
-                <article class="service-card" data-service="Facial">
+                <article class="service-card" data-service="Cut & beard">
                     <i class="fas fa-spa"></i>
-                    <h3>Facial</h3>
+                    <h3>Cut & beard</h3>
                     <p>Rejuvenating facial treatment for skin health and grooming.</p>
-                    <span class="price">R400</span>
+                    <span class="price">R130</span>
+                    <button type="button" class="add-to-cart-btn" data-service="Cut & beard">Add to Cart</button>
                 </article>
             </div>
         </section>
@@ -84,7 +98,7 @@
                 <div class="about-copy">
                     <span class="eyebrow">About us</span>
                     <h2>Where precision meets confidence.</h2>
-                    <p>From timeless fades to modern beard grooming, Menkave is built for customers who want quality, speed, and a personal touch. Our barbers bring experience, detail, and care to every appointment.</p>
+                    <p>At Pimville Menkave, the art of grooming meets a vibrant atmosphere, where clients can enjoy a clean, relaxed space equipped with free Wi-Fi and live sports screening. This modern barbershop takes pride in offering a range of services, including stylish cuts, trims, and dye treatments, all tailored to individual preferences. With a dedicated team of professionals and an inclusive, kid-friendly environment, every visit is designed to elevate your grooming experience.</p>
                     <ul class="about-list">
                         <li><i class="fas fa-check"></i> Experienced barbers with attention to detail</li>
                         <li><i class="fas fa-check"></i> Clean, modern shop environment</li>
@@ -92,10 +106,91 @@
                     </ul>
                 </div>
                 <div class="about-image-wrapper">
-                    <img src="https://d2zdpiztbgorvt.cloudfront.net/region1/us/627527/biz_photo/201cbe7eb81e48bfb14c79a198f2a9-assembly-barbershop-biz-photo-9d0f423e61a845faa978b2592970ca-booksy.jpeg" alt="Barber working on client's haircut">
+                    <img src="https://images.fresha.com/locations/location-profile-images/2548421/4603926/609d1c54-d695-4178-ac73-27d5b039cb3a-PimvilleMenkave-ZA-Gauteng-Pimville-PimvilleZone4-Fresha.jpg?class=gallery-modal-small&watermark=true&f_width=640" alt="Barber working on client's haircut">
                 </div>
             </div>
         </section>
+
+        <section class="reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Customer reviews</span>
+                    <h2>What our clients say.</h2>
+                </div>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <blockquote>"Amazing service! The fade was perfect and the atmosphere is so welcoming. Will definitely be back."</blockquote>
+                        <cite>- Thabo M., Soweto</cite>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <blockquote>"Best beard trim I've ever had. The barbers are skilled and take their time. Highly recommend!"</blockquote>
+                        <cite>- Lerato K., Johannesburg</cite>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <blockquote>"Clean shop, friendly staff, and great results. My go-to place for all my grooming needs."</blockquote>
+                        <cite>- Sipho N., Pretoria</cite>
+                    </div>
+                </div>
+                <div class="review-submit">
+                    <button id="leave-review-btn" class="btn btn-secondary">Leave a Review</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Review Submission Modal -->
+        <div id="review-modal" class="review-modal">
+            <div class="review-modal-content">
+                <span class="review-close">&times;</span>
+                <h2>Share Your Experience</h2>
+                <form id="review-form">
+                    <div class="form-group">
+                        <label for="review-name">Name</label>
+                        <input type="text" id="review-name" name="review-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-email">Email</label>
+                        <input type="email" id="review-email" name="review-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-rating">Rating</label>
+                        <select id="review-rating" name="review-rating" required>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-text">Your Review</label>
+                        <textarea id="review-text" name="review-text" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+                <div id="review-message"></div>
+            </div>
+        </div>
 
         <section class="contact-section" id="contact">
             <div class="container contact-grid">
@@ -106,7 +201,7 @@
                     <div class="contact-details">
                         <div>
                             <i class="fas fa-map-marker-alt"></i>
-                            <p>123 Barber Lane, Cape Town, South Africa</p>
+                            <p>4268 Qadolo Street, Pimville Zone 4, Pimville, Gauteng</p>
                         </div>
                         <div>
                             <i class="fas fa-phone"></i>
@@ -116,6 +211,19 @@
                             <i class="fas fa-envelope"></i>
                             <p>hello@menkave.co.za</p>
                         </div>
+                    </div>
+                    <a class="location-link" href="https://maps.google.com/?q=4268+Qadolo+Street,+Pimville+Zone+4,+Pimville,+Gauteng" target="_blank" rel="noopener noreferrer">View location on Google Maps</a>
+                    <div class="opening-hours">
+                        <h3>Opening times</h3>
+                        <ul>
+                            <li><strong>Monday</strong> Closed</li>
+                            <li><strong>Tuesday</strong> 9:00 am - 6:00 pm</li>
+                            <li><strong>Wednesday</strong> 9:00 am - 6:00 pm</li>
+                            <li><strong>Thursday</strong> 9:00 am - 6:00 pm</li>
+                            <li><strong>Friday</strong> 9:00 am - 6:00 pm</li>
+                            <li><strong>Saturday</strong> 9:00 am - 6:00 pm</li>
+                            <li><strong>Sunday</strong> 9:00 am - 6:00 pm</li>
+                        </ul>
                     </div>
                 </div>
                 <form class="contact-form">
@@ -140,10 +248,10 @@
             <div class="container booking-wrapper">
                 <div class="booking-info">
                     <span class="eyebrow">Reserve a slot</span>
-                    <h2>Reserve your appointment and pay securely.</h2>
-                    <p>Choose a time, pick your service, and complete payment in a single step. You will receive a confirmation message instantly.</p>
+                    <h2>Book your selected services and pay securely.</h2>
+                    <p>Add services to your cart, then choose a time and complete payment in a single step. You will receive a confirmation message instantly.</p>
                     <ul class="booking-features">
-                        <li><i class="fas fa-check"></i> Choose your barber slot</li>
+                        <li><i class="fas fa-check"></i> Add services to cart</li>
                         <li><i class="fas fa-check"></i> Secure payment form</li>
                         <li><i class="fas fa-check"></i> Instant booking confirmation</li>
                     </ul>
@@ -164,15 +272,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="service">Service</label>
-                        <select id="service" name="service" required>
-                            <option value="Haircut">Haircut - R450</option>
-                            <option value="Beard Trim">Beard Trim - R300</option>
-                            <option value="Style & Finish">Style & Finish - R600</option>
-                            <option value="Shave">Shave - R250</option>
-                            <option value="Hair Wash">Hair Wash - R150</option>
-                            <option value="Facial">Facial - R400</option>
-                        </select>
+                        <label>Selected Services</label>
+                        <div id="cart-summary"></div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -182,11 +283,15 @@
                         <div class="form-group">
                             <label for="time">Time slot</label>
                             <select id="time" name="time" required>
+                                <option value="9:00 AM">9:00 AM</option>
                                 <option value="10:00 AM">10:00 AM</option>
-                                <option value="11:30 AM">11:30 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
                                 <option value="1:00 PM">1:00 PM</option>
-                                <option value="2:30 PM">2:30 PM</option>
+                                <option value="2:00 PM">2:00 PM</option>
+                                <option value="3:00 PM">3:00 PM</option>
                                 <option value="4:00 PM">4:00 PM</option>
+                                <option value="5:00 PM">5:00 PM</option>
                             </select>
                         </div>
                     </div>
@@ -217,6 +322,17 @@
             </div>
         </section>
     </main>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items"></div>
+            <div id="cart-total"></div>
+            <button id="checkout-btn" class="btn btn-primary">Proceed to Checkout</button>
+        </div>
+    </div>
 
     <footer class="site-footer">
         <div class="container footer-inner">

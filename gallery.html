@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="https://images.fresha.com/locations/location-profile-images/2548421/4603926/609d1c54-d695-4178-ac73-27d5b039cb3a-PimvilleMenkave-ZA-Gauteng-Pimville-PimvilleZone4-Fresha.jpg?class=gallery-modal-small&watermark=true&f_width=640">
     <title>Menkave Gallery</title>
 </head>
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <a href="index.html" class="brand">Menkave</a>
+            <a href="index.html" class="brand">Pimville Menkave</a>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="gallery.html" class="active">Gallery</a>
@@ -22,8 +23,8 @@
     <main>
         <section class="hero hero-small">
             <div class="container hero-content">
-                <span class="eyebrow">Our work</span>
-                <h1>Barber gallery from South Africa</h1>
+                <span class="eyebrow">Image Gallery</span>
+                <h1>Barber gallery from Pimville Menkave</h1>
                 <p>Explore the latest styles, fades, designs, and beard grooming results from Menkave Cape Town.</p>
                 <a href="index.html#booking" class="btn btn-primary">Book Your Slot</a>
             </div>
@@ -32,31 +33,39 @@
         <section class="gallery-section container">
             <div class="gallery-grid">
                 <figure class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80" alt="Sharp barber haircut" loading="lazy">
+                    <img src="Gallery images/Screenshot_14-2-2026_12310_www.instagram.com.jpeg" loading="lazy">
                     <figcaption>Classic fade and precision cut.</figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Beard trim closeup" loading="lazy">
+                    <img src="Gallery images/Screenshot_14-4-2026_122837_www.instagram.com.jpeg" alt="Beard trim closeup" loading="lazy">
                     <figcaption>Beard shaping and styling.</figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Modern barber shop interior" loading="lazy">
-                    <figcaption>Modern interior and comfort.</figcaption>
+                    <img src="Gallery images/Screenshot_14-1-2026_123155_www.instagram.com.jpeg" loading="lazy">
+                    <figcaption>Classic fade and precision cut.</figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80" alt="Barber using tools" loading="lazy">
-                    <figcaption>Skilled barbers, premium tools.</figcaption>
+                    <img src="Gallery images/Screenshot_14-3-2026_122938_www.instagram.com.jpeg" loading="lazy">
+                    <figcaption>Colorful hair dyeing fade.</figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1505455184860-5d1b6ffee08e?auto=format&fit=crop&w=800&q=80" alt="Beard grooming" loading="lazy">
-                    <figcaption>Clean beard finishes.</figcaption>
+                    <img src="Gallery images/Screenshot_14-6-2026_13124_www.instagram.com.jpeg" loading="lazy">
+                    <figcaption>High taper fade.</figcaption>
                 </figure>
                 <figure class="gallery-card">
-                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Style consultation" loading="lazy">
+                    <img src="Screenshot_13-4-2026_235628_www.instagram.com.jpeg" loading="lazy">
                     <figcaption>Style consultation for every look.</figcaption>
                 </figure>
             </div>
         </section>
+
+        <!-- Image Modal -->
+        <div id="image-modal" class="image-modal">
+            <span class="image-close">&times;</span>
+            <img class="image-modal-content" id="modal-image">
+            <div id="image-caption"></div>
+        </div>
+
     </main>
 
     <footer class="site-footer">
