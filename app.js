@@ -1,5 +1,5 @@
 // ===== BACKEND API CONFIGURATION =====
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = '/api';
 
 // ===== SLOT RESERVATION SYSTEM (BACKEND) =====
 
@@ -146,25 +146,29 @@ const bookingForm = document.getElementById('booking-form');
 const priceDisplay = document.getElementById('service-price');
 const formMessage = document.getElementById('form-message');
 
+function formatCurrency(amount) {
+    return `R${Number(amount).toFixed(0)}`;
+}
+
 function updateBookingSummary() {
     const summary = document.getElementById('cart-summary');
     const priceDisplay = document.getElementById('service-price');
     
     if (cart.length === 0) {
         summary.innerHTML = '<p style="color: var(--danger);">No services selected. Please add services to cart first.</p>';
-        priceDisplay.textContent = 'R0';
+        priceDisplay.textContent = formatCurrency(0);
         return;
     }
     
     let html = '<h4>Selected Services:</h4><ul>';
     let total = 0;
     cart.forEach(item => {
-        total += item.price;
-        html += `<li><span>${item.service}</span><span>R${item.price}</span></li>`;
+        total += item.price * item.quantity;
+        html += `<li><span>${item.service} x${item.quantity}</span><span>${formatCurrency(item.price * item.quantity)}</span></li>`;
     });
     html += '</ul>';
     summary.innerHTML = html;
-    priceDisplay.textContent = `R${total}`;
+    priceDisplay.textContent = formatCurrency(total);
 }
 
 function showMessage(message, type) {
@@ -208,8 +212,15 @@ function validateBooking(data) {
 // Cart functionality
 let cart = [];
 
-function addToCart(service, price) {
-    cart.push({service, price});
+function addToCart(service, price, quantity = 1) {
+    const existingItem = cart.find(item => item.service === service);
+
+    if (existingItem) {
+        existingItem.quantity += quantity;
+    } else {
+        cart.push({ service, price, quantity });
+    }
+
     updateCartDisplay();
     updateBookingSummary();
     showCart();
@@ -217,8 +228,11 @@ function addToCart(service, price) {
 
 function updateCartDisplay() {
     const cartCount = document.getElementById('cart-count');
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    cartCount.textContent = `R${total}`;
+    if (!cartCount) return;
+
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.textContent = totalItems;
+    cartCount.setAttribute('aria-label', `${totalItems} item${totalItems === 1 ? '' : 's'} in cart`);
 }
 
 function showCart() {
@@ -229,20 +243,27 @@ function showCart() {
     cartItems.innerHTML = '';
     let total = 0;
     
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p>Your cart is empty. Add a service to get started.</p>';
+        cartTotal.innerHTML = '<span>Total: R0</span>';
+        modal.style.display = 'block';
+        return;
+    }
+
     cart.forEach((item, index) => {
-        total += item.price;
+        total += item.price * item.quantity;
         
         const itemDiv = document.createElement('div');
         itemDiv.className = 'cart-item';
         itemDiv.innerHTML = `
-            <span>${item.service}</span>
-            <span>R${item.price}</span>
+            <span>${item.service} x${item.quantity}</span>
+            <span>${formatCurrency(item.price * item.quantity)}</span>
             <button class="remove-btn" data-index="${index}">Remove</button>
         `;
         cartItems.appendChild(itemDiv);
     });
     
-    cartTotal.innerHTML = `<span>Total: R${total}</span>`;
+    cartTotal.innerHTML = `<span>Total: ${formatCurrency(total)}</span>`;
     
     modal.style.display = 'block';
 }
@@ -258,34 +279,87 @@ function removeFromCart(index) {
     showCart();
 }
 
+function addServiceToCheckout(card) {
+    if (!card) return;
+
+    const serviceName = card.dataset.service;
+    const servicePrice = Number(card.dataset.price);
+
+    if (!serviceName || Number.isNaN(servicePrice)) return;
+
+    addToCart(serviceName, servicePrice, 1);
+    showCart();
+
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+        bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Add date change listener to update available time slots
     const dateInput = document.getElementById('date');
     if (dateInput) {
         dateInput.addEventListener('change', updateTimeSlotOptions);
+
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+        dateInput.value = today;
+        updateTimeSlotOptions();
     }
+
     const servicesGrid = document.querySelector('.services-grid');
     if (servicesGrid) {
         servicesGrid.addEventListener('click', (event) => {
-            const btn = event.target.closest('.add-to-cart-btn');
-            if (!btn) return;
+            const cartIcon = event.target.closest('.add-cart');
+            if (cartIcon) {
+                event.preventDefault();
+                event.stopPropagation();
+                addServiceToCheckout(cartIcon.closest('.service-card'));
+                return;
+            }
 
-            const service = btn.getAttribute('data-service');
-            const priceElement = btn.closest('.service-card')?.querySelector('.price');
-            const price = priceElement ? parseInt(priceElement.textContent.replace('R', '')) : 0;
+            const card = event.target.closest('.service-card');
+            if (!card) return;
 
-            if (service && !Number.isNaN(price)) {
-                addToCart(service, price);
+            const bookingSection = document.getElementById('booking');
+            if (bookingSection) {
+                bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     }
-    
+
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card) => {
+        card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                addServiceToCheckout(card);
+            }
+        });
+    });
+
     const cartIcon = document.querySelector('.cart-icon');
     if (cartIcon) {
         cartIcon.addEventListener('click', showCart);
     }
     
-    document.querySelector('.close').addEventListener('click', closeCart);
+    const closeBtn = document.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeCart);
+    }
+
+    const continueShoppingBtn = document.getElementById('continue-shopping-btn');
+    if (continueShoppingBtn) {
+        continueShoppingBtn.addEventListener('click', closeCart);
+    }
+
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', () => {
+            closeCart();
+            document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
     
     window.addEventListener('click', (event) => {
         const modal = document.getElementById('cart-modal');
@@ -303,17 +377,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 removeFromCart(index);
             }
         });
-    }
-
-    // Set minimum date to today for date picker
-    const dateInput = document.getElementById('date');
-    if (dateInput) {
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.setAttribute('min', today);
-        dateInput.value = today; // Set default to today
-        
-        // Load available slots for today on page load
-        updateTimeSlotOptions();
     }
 
     updateBookingSummary();
@@ -460,10 +523,4 @@ bookingForm.addEventListener('submit', async (event) => {
     }, 900);
 });
 
-// Service card click functionality
-// Keeps the interface responsive by jumping the user to the booking section
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('click', () => {
-        document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-    });
-});
+

@@ -1,16 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
+const publicDirectory = __dirname;
 
 // Middleware
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+    origin: process.env.CORS_ORIGIN || true,
     credentials: true
 }));
 app.use(express.json());
+app.use(express.static(publicDirectory));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/menkave-barber', {
@@ -28,7 +31,20 @@ app.use('/api/bookings', bookingRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'Backend server is running' });
+    res.json({
+        status: 'ok',
+        database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+    });
+});
+
+// Keep unknown API requests as JSON instead of returning the frontend page.
+app.use('/api', (req, res) => {
+    res.status(404).json({ error: 'API route not found' });
+});
+
+// Support browser navigation when the frontend is hosted by this server.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(publicDirectory, 'index.html'));
 });
 
 // Error handling middleware

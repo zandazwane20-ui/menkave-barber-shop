@@ -59,9 +59,9 @@ Server running on http://localhost:5000
 
 ### 4. **Test Backend**
 
-Open in browser: `http://localhost:5000/api/health`
+Open the site at `http://localhost:5000/` and test the API at `http://localhost:5000/api/health`.
 
-Should see: `{ "status": "Backend server is running" }`
+The API should return a response like: `{ "status": "ok", "database": "connected" }`
 
 ### 5. **Test Email Notifications**
 
@@ -176,7 +176,7 @@ Your `app.js` has been updated to:
 
 ### Development:
 1. Run backend: `npm run dev`
-2. Open index.html in browser
+2. Open `http://localhost:5000/` in your browser
 3. Test booking a slot
 4. Refresh page - slot stays reserved ✅
 5. Try booking again - slot not available ✅
@@ -184,9 +184,8 @@ Your `app.js` has been updated to:
 ### Production Deployment:
 1. Use MongoDB Atlas for database
 2. Deploy backend to Heroku, AWS, or your server
-3. Update `API_BASE_URL` in app.js with production URL
-4. Update `CORS_ORIGIN` and `MONGODB_URI` in `.env`
-5. Run `npm start`
+3. Update `CORS_ORIGIN` and `MONGODB_URI` in `.env`
+4. Run `npm start`
 
 See **BACKEND_SETUP.md** for detailed deployment instructions.
 

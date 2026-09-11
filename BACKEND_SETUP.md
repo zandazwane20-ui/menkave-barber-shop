@@ -47,15 +47,16 @@ brew services start mongodb-community
 Copy `.env.example` to `.env` and update:
 
 ```bash
-cp .env.example .env
-```
-
-Edit `.env`:
-```
 PORT=5000
 MONGODB_URI=mongodb://localhost:27017/menkave-barber
 NODE_ENV=development
-CORS_ORIGIN=http://localhost:3000
+CORS_ORIGIN=http://localhost:5000
+```
+
+For MongoDB Atlas, replace `MONGODB_URI` with your connection string and replace `<db_password>` locally with the database user's password:
+
+```bash
+MONGODB_URI=mongodb+srv://zandazwane20_db_user:<db_password>@cluster0.szrkjc7.mongodb.net/menkave-barber
 ```
 
 ### Step 3.5: Setup Email Notifications
@@ -106,13 +107,11 @@ Server should run on `http://localhost:5000`
 
 Test health: `http://localhost:5000/api/health`
 
-### Step 5: Update Frontend Configuration
+### Step 5: Start the Full Site
 
-In your HTML file or app.js, add this at the top:
+The Express server serves both the frontend and backend. The frontend uses the same-origin API path `/api`, so no separate frontend server or API URL change is required.
 
-```javascript
-const API_BASE_URL = 'http://localhost:5000/api';
-```
+Open the site at `http://localhost:5000/` after starting the server.
 
 ## API Endpoints
 
